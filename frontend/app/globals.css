@@ -1,0 +1,1130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light dark;
+  --iron-950: #101419;
+  --iron-900: #171d24;
+  --iron-800: #242b33;
+  --iron-700: #36404a;
+  --iron-600: #4b5560;
+  --steel-500: #7f8b92;
+  --steel-300: #b8c1c6;
+  --copper-600: #a65f3a;
+  --copper-500: #c27749;
+  --chrome-50: #f7f8f8;
+  --chrome-100: #edf0f1;
+  --chrome-200: #d7dcdf;
+  --chrome-300: #b6c0c6;
+  --bronze-700: #8f5d2c;
+  --bronze-600: #a66f36;
+  --bronze-500: #c08445;
+  --bronze-100: #f4e3cf;
+  --bg-top: #f2f4f4;
+  --bg-bottom: #dfe4e7;
+}
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 12mm 14mm;
+  }
+  html,
+  body {
+    background: #fff !important;
+    color: #111 !important;
+  }
+  .workspace-header,
+  nav,
+  .print\:hidden {
+    display: none !important;
+  }
+  .invoice-document {
+    width: 100% !important;
+    max-width: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    font-size: 10pt !important;
+  }
+  .invoice-document * {
+    color: #111 !important;
+  }
+  .invoice-document header,
+  .invoice-document section,
+  .invoice-document footer,
+  .invoice-item-row {
+    break-inside: avoid;
+  }
+  .invoice-items-header {
+    display: grid !important;
+  }
+  a[href]::after {
+    content: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .invoice-items-header {
+    display: none;
+  }
+  .invoice-item-row {
+    grid-template-columns: 1fr 1fr;
+  }
+  .invoice-item-row > :first-child {
+    grid-column: 1 / -1;
+  }
+  .invoice-document > section.py-7 > .grid:first-child {
+    display: none;
+  }
+  .invoice-document > section.py-7 > .divide-y > .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .invoice-document > section.py-7 > .divide-y > .grid > :first-child {
+    grid-column: 1 / -1;
+  }
+  .invoice-document {
+    overflow-wrap: anywhere;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  max-width: 100%;
+  overflow-x: hidden;
+  background:
+    linear-gradient(115deg, rgba(255, 255, 255, 0.6), transparent 34%),
+    linear-gradient(150deg, rgba(192, 132, 69, 0.1), transparent 42%),
+    linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
+  color: var(--iron-950);
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+}
+
+main,
+header,
+section,
+article,
+nav {
+  min-width: 0;
+}
+
+::selection {
+  background: rgba(192, 132, 69, 0.28);
+  color: var(--iron-950);
+}
+
+.metal-surface {
+  border: 1px solid rgba(54, 64, 74, 0.18);
+  background: rgba(250, 251, 251, 0.9);
+  box-shadow:
+    0 18px 45px rgba(16, 20, 25, 0.09),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.metal-divider {
+  border-color: rgba(54, 64, 74, 0.15);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+input:not([type="checkbox"]):not([type="radio"]),
+select,
+textarea {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid var(--chrome-300);
+  background: rgba(255, 255, 255, 0.98);
+  color: var(--iron-950);
+  padding: 0.85rem 1rem;
+  font: inherit;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+input:not([type="checkbox"]):not([type="radio"]):focus,
+select:focus,
+textarea:focus {
+  border-color: var(--bronze-500);
+  outline: 3px solid rgba(192, 132, 69, 0.22);
+  outline-offset: 1px;
+}
+
+.bg-white,
+.bg-white\/85,
+.bg-white\/90,
+.bg-white\/92 {
+  background-color: rgba(250, 251, 251, 0.94) !important;
+}
+
+.bg-white\/70 {
+  background-color: rgba(255, 255, 255, 0.78) !important;
+}
+
+/* A public light template must stay light even when the staff dashboard uses
+   the operating-system dark appearance. */
+.public-company-site.public-atelier,
+.public-company-site.public-atelier
+  input:not([type="checkbox"]):not([type="radio"]),
+.public-company-site.public-atelier select,
+.public-company-site.public-atelier textarea {
+  color: #20201e !important;
+}
+
+.public-company-site.public-atelier #termin form {
+  background-color: rgba(255, 255, 255, 0.82) !important;
+}
+
+.public-company-site.public-atelier #termin label {
+  color: #302b27 !important;
+}
+
+.public-company-site.public-atelier
+  #termin
+  input:not([type="checkbox"]):not([type="radio"]),
+.public-company-site.public-atelier #termin select,
+.public-company-site.public-atelier #termin textarea {
+  border-color: #d8cec3 !important;
+  background-color: #ffffff !important;
+  color: #20201e !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95) !important;
+}
+
+.bg-slate-50,
+.bg-slate-100 {
+  background-color: rgba(237, 240, 241, 0.92) !important;
+}
+
+.bg-slate-950,
+.bg-slate-950\/50,
+.bg-slate-950\/94 {
+  background: linear-gradient(
+    135deg,
+    var(--iron-950),
+    var(--iron-800)
+  ) !important;
+}
+
+.bg-brand {
+  background-color: var(--bronze-600) !important;
+}
+
+.bg-brand-soft {
+  background-color: var(--bronze-100) !important;
+}
+
+.text-ink {
+  color: var(--iron-950) !important;
+}
+
+.text-slate,
+.text-slate-500,
+.text-slate-700,
+.text-slate-800 {
+  color: var(--iron-700) !important;
+}
+
+.text-brand,
+.text-brand-dark {
+  color: var(--bronze-700) !important;
+}
+
+.border-white\/70,
+.border-slate-200 {
+  border-color: rgba(54, 64, 74, 0.18) !important;
+}
+
+.ring-slate-200 {
+  --tw-ring-color: rgba(54, 64, 74, 0.18) !important;
+}
+
+.shadow-panel {
+  box-shadow:
+    0 20px 50px rgba(16, 20, 25, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.72) !important;
+}
+
+.bg-emerald-50\/55,
+.bg-emerald-50,
+.bg-amber-50\/60,
+.bg-amber-50,
+.bg-rose-50\/50,
+.bg-rose-50 {
+  border-color: rgba(54, 64, 74, 0.14) !important;
+}
+
+.bg-emerald-50\/55,
+.bg-emerald-50 {
+  background-color: #e8f2ee !important;
+}
+
+.bg-amber-50\/60,
+.bg-amber-50 {
+  background-color: #f3eadc !important;
+}
+
+.bg-rose-50\/50,
+.bg-rose-50 {
+  background-color: #f2e4e2 !important;
+}
+
+.bg-emerald-100 {
+  background-color: #d7e8df !important;
+}
+
+.bg-amber-100 {
+  background-color: #ead9bd !important;
+}
+
+.bg-rose-100 {
+  background-color: #ead4d1 !important;
+}
+
+.text-emerald-800,
+.text-amber-800,
+.text-rose-800 {
+  color: var(--iron-950) !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #6d7781;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --iron-950: #f1f4f5;
+    --iron-900: #dce1e4;
+    --iron-800: #c5cdd1;
+    --iron-700: #aeb8be;
+    --iron-600: #929da4;
+    --chrome-50: #15191d;
+    --chrome-100: #1b2025;
+    --chrome-200: #272d33;
+    --chrome-300: #46515a;
+    --bronze-700: #e0a06f;
+    --bronze-600: #bd6d40;
+    --bronze-500: #d17c4c;
+    --bronze-100: #3b2921;
+    --steel-500: #8d99a1;
+    --steel-300: #c2cacf;
+    --copper-600: #bd6d40;
+    --copper-500: #dc895a;
+    --bg-top: #111417;
+    --bg-bottom: #242a2f;
+  }
+
+  body {
+    background:
+      linear-gradient(112deg, rgba(226, 232, 235, 0.06), transparent 31%),
+      linear-gradient(145deg, rgba(189, 109, 64, 0.1), transparent 42%),
+      linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
+    color: var(--iron-950);
+  }
+
+  ::selection {
+    background: rgba(220, 137, 90, 0.38);
+    color: #fff;
+  }
+
+  .metal-surface {
+    border-color: rgba(158, 170, 178, 0.2);
+    background: rgba(27, 32, 37, 0.9);
+    box-shadow:
+      0 20px 50px rgba(0, 0, 0, 0.26),
+      inset 0 1px 0 rgba(226, 232, 235, 0.07);
+  }
+
+  .metal-divider {
+    border-color: rgba(158, 170, 178, 0.18);
+  }
+
+  input:not([type="checkbox"]):not([type="radio"]),
+  select,
+  textarea {
+    border-color: rgba(158, 170, 178, 0.42);
+    background: rgba(19, 23, 27, 0.97);
+    color: var(--iron-950);
+    box-shadow: inset 0 1px 0 rgba(226, 232, 235, 0.08);
+  }
+
+  input:not([type="checkbox"]):not([type="radio"]):focus,
+  select:focus,
+  textarea:focus {
+    border-color: var(--copper-500);
+    outline-color: rgba(225, 155, 107, 0.24);
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: #929ca3;
+  }
+
+  .bg-white,
+  .bg-white\/70,
+  .bg-white\/85,
+  .bg-white\/90,
+  .bg-white\/92 {
+    background-color: rgba(27, 32, 37, 0.94) !important;
+  }
+
+  .bg-slate-50,
+  .bg-slate-100 {
+    background: linear-gradient(
+      135deg,
+      rgba(39, 45, 51, 0.96),
+      rgba(29, 34, 39, 0.96)
+    ) !important;
+  }
+
+  .bg-slate-950,
+  .bg-slate-950\/50,
+  .bg-slate-950\/94 {
+    background: linear-gradient(
+      135deg,
+      #101316,
+      #1d2227 58%,
+      #30373d
+    ) !important;
+  }
+
+  .bg-brand {
+    background: linear-gradient(
+      135deg,
+      var(--bronze-600),
+      var(--copper-600)
+    ) !important;
+  }
+
+  .bg-brand-soft {
+    background-color: rgba(78, 47, 32, 0.76) !important;
+  }
+
+  .text-ink {
+    color: #f1f4f5 !important;
+  }
+
+  .text-slate,
+  .text-slate-300,
+  .text-slate-500,
+  .text-slate-700,
+  .text-slate-800 {
+    color: #b8c1c6 !important;
+  }
+
+  .text-brand,
+  .text-brand-dark,
+  .text-brand-soft {
+    color: var(--bronze-700) !important;
+  }
+
+  .border-white\/10,
+  .border-white\/55,
+  .border-white\/70,
+  .border-slate-200,
+  .border-slate-800\/40 {
+    border-color: rgba(158, 170, 178, 0.22) !important;
+  }
+
+  .ring-slate-200,
+  .ring-emerald-200,
+  .ring-amber-200,
+  .ring-rose-200 {
+    --tw-ring-color: rgba(158, 170, 178, 0.22) !important;
+  }
+
+  .shadow-panel {
+    box-shadow:
+      0 24px 56px rgba(0, 0, 0, 0.34),
+      inset 0 1px 0 rgba(226, 232, 235, 0.08) !important;
+  }
+
+  .bg-emerald-50\/55,
+  .bg-emerald-50 {
+    background-color: rgba(28, 64, 49, 0.78) !important;
+  }
+
+  .bg-amber-50\/60,
+  .bg-amber-50 {
+    background-color: rgba(75, 54, 29, 0.78) !important;
+  }
+
+  .bg-rose-50\/50,
+  .bg-rose-50 {
+    background-color: rgba(73, 37, 35, 0.78) !important;
+  }
+
+  .bg-emerald-100 {
+    background-color: rgba(51, 92, 72, 0.9) !important;
+  }
+
+  .bg-amber-100 {
+    background-color: rgba(102, 72, 37, 0.9) !important;
+  }
+
+  .bg-rose-100 {
+    background-color: rgba(98, 52, 48, 0.9) !important;
+  }
+
+  .text-emerald-800,
+  .text-amber-800,
+  .text-rose-800 {
+    color: #f2f5f1 !important;
+  }
+}
+
+/* The workspace can override the device preference without changing the
+   independently branded public websites. */
+html[data-theme="light"] .workspace-theme {
+  color: #101419 !important;
+  background:
+    linear-gradient(115deg, rgba(255, 255, 255, 0.6), transparent 34%),
+    linear-gradient(150deg, rgba(192, 132, 69, 0.1), transparent 42%),
+    linear-gradient(180deg, #f2f4f4, #dfe4e7) !important;
+}
+
+html[data-theme="light"]
+  .workspace-theme
+  input:not([type="checkbox"]):not([type="radio"]),
+html[data-theme="light"] .workspace-theme select,
+html[data-theme="light"] .workspace-theme textarea {
+  border-color: #b6c0c6 !important;
+  background: rgba(255, 255, 255, 0.98) !important;
+  color: #101419 !important;
+}
+
+html[data-theme="light"] .workspace-theme .bg-white,
+html[data-theme="light"] .workspace-theme .bg-white\/70,
+html[data-theme="light"] .workspace-theme .bg-white\/85,
+html[data-theme="light"] .workspace-theme .bg-white\/90,
+html[data-theme="light"] .workspace-theme .bg-white\/92 {
+  background-color: rgba(250, 251, 251, 0.94) !important;
+}
+
+html[data-theme="light"] .workspace-theme .bg-slate-50,
+html[data-theme="light"] .workspace-theme .bg-slate-100 {
+  background: rgba(237, 240, 241, 0.92) !important;
+}
+
+html[data-theme="light"] .workspace-theme .text-ink,
+html[data-theme="light"] .workspace-theme .text-slate-950,
+html[data-theme="light"] .workspace-theme .text-slate-900,
+html[data-theme="light"] .workspace-theme .text-slate-800 {
+  color: #101419 !important;
+}
+
+html[data-theme="light"] .workspace-theme .text-slate,
+html[data-theme="light"] .workspace-theme .text-slate-300,
+html[data-theme="light"] .workspace-theme .text-slate-500,
+html[data-theme="light"] .workspace-theme .text-slate-600,
+html[data-theme="light"] .workspace-theme .text-slate-700 {
+  color: #4b5560 !important;
+}
+
+html[data-theme="dark"] .workspace-theme {
+  color: #f1f4f5 !important;
+  background:
+    linear-gradient(112deg, rgba(226, 232, 235, 0.06), transparent 31%),
+    linear-gradient(145deg, rgba(189, 109, 64, 0.1), transparent 42%),
+    linear-gradient(180deg, #111417, #242a2f) !important;
+}
+
+html[data-theme="dark"]
+  .workspace-theme
+  input:not([type="checkbox"]):not([type="radio"]),
+html[data-theme="dark"] .workspace-theme select,
+html[data-theme="dark"] .workspace-theme textarea {
+  border-color: rgba(158, 170, 178, 0.42) !important;
+  background: rgba(19, 23, 27, 0.97) !important;
+  color: #f1f4f5 !important;
+}
+
+html[data-theme="dark"] .workspace-theme .bg-white,
+html[data-theme="dark"] .workspace-theme .bg-white\/70,
+html[data-theme="dark"] .workspace-theme .bg-white\/85,
+html[data-theme="dark"] .workspace-theme .bg-white\/90,
+html[data-theme="dark"] .workspace-theme .bg-white\/92 {
+  background-color: rgba(27, 32, 37, 0.94) !important;
+}
+
+html[data-theme="dark"] .workspace-theme .bg-slate-50,
+html[data-theme="dark"] .workspace-theme .bg-slate-100 {
+  background: linear-gradient(
+    135deg,
+    rgba(39, 45, 51, 0.96),
+    rgba(29, 34, 39, 0.96)
+  ) !important;
+}
+
+html[data-theme="dark"] .workspace-theme .text-ink,
+html[data-theme="dark"] .workspace-theme .text-slate-950,
+html[data-theme="dark"] .workspace-theme .text-slate-900,
+html[data-theme="dark"] .workspace-theme .text-slate-800 {
+  color: #f1f4f5 !important;
+}
+
+html[data-theme="dark"] .workspace-theme .text-slate,
+html[data-theme="dark"] .workspace-theme .text-slate-300,
+html[data-theme="dark"] .workspace-theme .text-slate-500,
+html[data-theme="dark"] .workspace-theme .text-slate-600,
+html[data-theme="dark"] .workspace-theme .text-slate-700 {
+  color: #b8c1c6 !important;
+}
+
+/* Dark surfaces that deliberately remain in the workspace need their own light
+   treatment; generic text utility overrides otherwise turn their copy grey. */
+html[data-theme="light"] .workspace-theme .workspace-header .text-white {
+  color: #fff !important;
+}
+
+html[data-theme="light"] .workspace-theme .workspace-header .text-slate-200,
+html[data-theme="light"] .workspace-theme .workspace-header .text-slate-300 {
+  color: #d9e0e4 !important;
+}
+
+html[data-theme="light"] .workspace-theme .workspace-hero,
+html[data-theme="light"] .workspace-theme .workspace-financial-summary {
+  border-color: #cbd4d8 !important;
+  background: linear-gradient(135deg, #ffffff, #eef2f3) !important;
+  color: #101419 !important;
+}
+
+html[data-theme="light"] .workspace-theme .workspace-hero .text-white,
+html[data-theme="light"]
+  .workspace-theme
+  .workspace-financial-summary
+  .text-white {
+  color: #101419 !important;
+}
+
+html[data-theme="light"] .workspace-theme .workspace-hero .text-slate-200,
+html[data-theme="light"] .workspace-theme .workspace-hero .text-slate-300,
+html[data-theme="light"]
+  .workspace-theme
+  .workspace-financial-summary
+  .text-slate-200,
+html[data-theme="light"]
+  .workspace-theme
+  .workspace-financial-summary
+  .text-slate-300 {
+  color: #4b5560 !important;
+}
+
+html[data-theme="light"] .workspace-theme .workspace-hero .border-white\/25,
+html[data-theme="light"]
+  .workspace-theme
+  .workspace-financial-summary
+  .border-white\/10 {
+  border-color: #b6c0c6 !important;
+}
+
+html[data-theme="light"] .workspace-theme .workspace-hero .bg-white\/10 {
+  background-color: rgba(16, 20, 25, 0.06) !important;
+}
+
+/* A light workspace is a complete palette, not a dark screen with a pale
+   canvas. This also covers page-specific headers, action bars and totals. */
+html[data-theme="light"] .workspace-theme .bg-slate-950:not(.workspace-header),
+html[data-theme="light"] .workspace-theme .\!bg-slate-950 {
+  background: linear-gradient(135deg, #ffffff, #f5f7f8) !important;
+}
+
+html[data-theme="light"] .workspace-theme .bg-slate-950:not(.workspace-header),
+html[data-theme="light"] .workspace-theme .\!bg-slate-950 {
+  color: #101419 !important;
+}
+
+html[data-theme="light"] .workspace-theme .bg-slate-950:not(.workspace-header).text-white,
+html[data-theme="light"] .workspace-theme .bg-slate-950:not(.workspace-header) .text-white,
+html[data-theme="light"] .workspace-theme .\!bg-slate-950.\!text-slate-100,
+html[data-theme="light"] .workspace-theme .\!bg-slate-950 .\!text-slate-100 {
+  color: #101419 !important;
+}
+
+html[data-theme="light"] .workspace-theme .bg-slate-950:not(.workspace-header) .text-slate-200,
+html[data-theme="light"] .workspace-theme .bg-slate-950:not(.workspace-header) .text-slate-300,
+html[data-theme="light"] .workspace-theme .\!bg-slate-950 .text-slate-300,
+html[data-theme="light"] .workspace-theme .\!bg-slate-950 .\!text-slate-100 {
+  color: #4b5560 !important;
+}
+
+html[data-theme="light"] .workspace-theme .bg-slate-950:not(.workspace-header) .border-white\/10,
+html[data-theme="light"] .workspace-theme .bg-slate-950:not(.workspace-header) .border-white\/15,
+html[data-theme="light"] .workspace-theme .bg-slate-950:not(.workspace-header) .border-white\/25,
+html[data-theme="light"] .workspace-theme .\!bg-slate-950.\!border-slate-600 {
+  border-color: #cbd4d8 !important;
+}
+
+html[data-theme="light"] .workspace-theme .bg-slate-950:not(.workspace-header) .bg-white\/10 {
+  background-color: rgba(16, 20, 25, 0.06) !important;
+}
+
+html[data-theme="light"] .workspace-theme .bg-emerald-50,
+html[data-theme="light"] .workspace-theme .bg-emerald-50\/55 {
+  background-color: #edf8f1 !important;
+}
+
+html[data-theme="light"] .workspace-theme .bg-amber-50,
+html[data-theme="light"] .workspace-theme .bg-amber-50\/60 {
+  background-color: #fff8eb !important;
+}
+
+html[data-theme="light"] .workspace-theme .bg-rose-50,
+html[data-theme="light"] .workspace-theme .bg-rose-50\/50 {
+  background-color: #fff1f0 !important;
+}
+
+html[data-theme="light"] .workspace-theme .bg-emerald-100 {
+  background-color: #dff3e6 !important;
+}
+
+html[data-theme="light"] .workspace-theme .bg-amber-100 {
+  background-color: #ffedc8 !important;
+}
+
+html[data-theme="light"] .workspace-theme .bg-rose-100 {
+  background-color: #f9dedb !important;
+}
+
+html[data-theme="light"] .workspace-theme .border-emerald-100,
+html[data-theme="light"] .workspace-theme .border-emerald-200 {
+  border-color: #bfe0ca !important;
+}
+
+html[data-theme="light"] .workspace-theme .border-amber-100,
+html[data-theme="light"] .workspace-theme .border-amber-200 {
+  border-color: #f0d6a5 !important;
+}
+
+html[data-theme="light"] .workspace-theme .border-rose-100,
+html[data-theme="light"] .workspace-theme .border-rose-200 {
+  border-color: #ebc2be !important;
+}
+
+html[data-theme="light"] .workspace-theme .workspace-dashboard-intro {
+  color: #101419 !important;
+}
+
+html[data-theme="light"] .workspace-theme .workspace-dashboard-intro .text-white {
+  color: #101419 !important;
+}
+
+html[data-theme="light"] .workspace-theme .workspace-dashboard-intro .text-slate-300 {
+  color: #4b5560 !important;
+}
+
+html[data-theme="light"] .workspace-theme .workspace-dashboard-intro .border-white\/25 {
+  border-color: #b6c0c6 !important;
+}
+
+html[data-theme="light"] .workspace-theme .workspace-dashboard-intro .bg-white\/10 {
+  background-color: rgba(16, 20, 25, 0.06) !important;
+}
+
+/* PitlaneOne is a focused workshop operating system. Unlike the warmer
+   BusinessSite editor, its workspace always uses the visual language from the
+   product landing page: graphite surfaces, white type and a lime action cue. */
+.workspace-theme--pitlane {
+  color: #f8fafc !important;
+  background:
+    radial-gradient(ellipse at 80% -10%, rgba(215, 255, 63, 0.1), transparent 36%),
+    linear-gradient(180deg, #090d12 0%, #111820 100%) !important;
+}
+
+.workspace-theme--pitlane .workspace-header {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  background: #10161d !important;
+}
+
+.workspace-theme--pitlane .bg-white,
+.workspace-theme--pitlane .bg-white\/70,
+.workspace-theme--pitlane .bg-white\/85,
+.workspace-theme--pitlane .bg-white\/90,
+.workspace-theme--pitlane .bg-white\/92 {
+  background: #171e26 !important;
+}
+
+.workspace-theme--pitlane .bg-slate-50,
+.workspace-theme--pitlane .bg-slate-100 {
+  background: #1d252e !important;
+}
+
+.workspace-theme--pitlane .border-slate-100,
+.workspace-theme--pitlane .border-slate-200,
+.workspace-theme--pitlane .border-white\/10,
+.workspace-theme--pitlane .border-white\/15,
+.workspace-theme--pitlane .border-white\/25 {
+  border-color: rgba(255, 255, 255, 0.11) !important;
+}
+
+.workspace-theme--pitlane .text-ink,
+.workspace-theme--pitlane .text-slate-950,
+.workspace-theme--pitlane .text-slate-900,
+.workspace-theme--pitlane .text-slate-800 {
+  color: #f8fafc !important;
+}
+
+.workspace-theme--pitlane .text-slate,
+.workspace-theme--pitlane .text-slate-300,
+.workspace-theme--pitlane .text-slate-500,
+.workspace-theme--pitlane .text-slate-600,
+.workspace-theme--pitlane .text-slate-700 {
+  color: #aeb9c6 !important;
+}
+
+.workspace-theme--pitlane .text-brand,
+.workspace-theme--pitlane .text-brand-dark,
+.workspace-theme--pitlane .text-brand-soft {
+  color: #d7ff3f !important;
+}
+
+.workspace-theme--pitlane .bg-brand {
+  background: #d7ff3f !important;
+  color: #101419 !important;
+}
+
+.workspace-theme--pitlane .bg-brand.text-white,
+.workspace-theme--pitlane .bg-brand .text-white {
+  color: #101419 !important;
+}
+
+.workspace-theme--pitlane input:not([type="checkbox"]):not([type="radio"]),
+.workspace-theme--pitlane select,
+.workspace-theme--pitlane textarea {
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  background: #0d1319 !important;
+  color: #f8fafc !important;
+}
+
+.workspace-theme--pitlane .workspace-dashboard-intro {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  background:
+    linear-gradient(rgba(215, 255, 63, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(215, 255, 63, 0.028) 1px, transparent 1px),
+    linear-gradient(135deg, #111920, #0d1319) !important;
+  background-size: 32px 32px, 32px 32px, auto !important;
+}
+
+.workspace-theme--pitlane .workspace-dashboard-intro .bg-white\/10 {
+  background-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+/* The optional light workspace is intentionally warm: cream canvas, soft
+   caramel dividers and honey accents, not a cold white office interface. */
+html[data-theme="light"] .workspace-theme--pitlane {
+  color: #29231e !important;
+  background:
+    radial-gradient(ellipse at 80% -10%, rgba(220, 177, 110, 0.22), transparent 38%),
+    linear-gradient(180deg, #f7f0e4 0%, #eee1d0 100%) !important;
+}
+
+html[data-theme="light"] .workspace-theme--pitlane .workspace-header {
+  border-color: rgba(79, 57, 39, 0.15) !important;
+  background: rgba(255, 250, 242, 0.92) !important;
+  color: #29231e !important;
+}
+
+html[data-theme="light"] .workspace-theme--pitlane .workspace-header .text-white,
+html[data-theme="light"] .workspace-theme--pitlane .workspace-header .text-slate-200,
+html[data-theme="light"] .workspace-theme--pitlane .workspace-header .text-slate-300 {
+  color: #29231e !important;
+}
+
+html[data-theme="light"] .workspace-theme--pitlane .bg-white,
+html[data-theme="light"] .workspace-theme--pitlane .bg-white\/70,
+html[data-theme="light"] .workspace-theme--pitlane .bg-white\/85,
+html[data-theme="light"] .workspace-theme--pitlane .bg-white\/90,
+html[data-theme="light"] .workspace-theme--pitlane .bg-white\/92 {
+  background: rgba(255, 250, 242, 0.9) !important;
+}
+
+html[data-theme="light"] .workspace-theme--pitlane .bg-slate-50,
+html[data-theme="light"] .workspace-theme--pitlane .bg-slate-100 {
+  background: #f1e6d7 !important;
+}
+
+html[data-theme="light"] .workspace-theme--pitlane .bg-slate-900\/80,
+html[data-theme="light"] .workspace-theme--pitlane .bg-slate-900,
+html[data-theme="light"] .workspace-theme--pitlane .bg-slate-800 {
+  background: rgba(255, 250, 242, 0.84) !important;
+}
+
+html[data-theme="light"] .workspace-theme--pitlane .border-slate-100,
+html[data-theme="light"] .workspace-theme--pitlane .border-slate-200,
+html[data-theme="light"] .workspace-theme--pitlane .border-white\/10,
+html[data-theme="light"] .workspace-theme--pitlane .border-white\/15,
+html[data-theme="light"] .workspace-theme--pitlane .border-white\/25 {
+  border-color: rgba(79, 57, 39, 0.16) !important;
+}
+
+html[data-theme="light"] .workspace-theme--pitlane .text-ink,
+html[data-theme="light"] .workspace-theme--pitlane .text-slate-950,
+html[data-theme="light"] .workspace-theme--pitlane .text-slate-900,
+html[data-theme="light"] .workspace-theme--pitlane .text-slate-800,
+html[data-theme="light"] .workspace-theme--pitlane .text-white {
+  color: #29231e !important;
+}
+
+html[data-theme="light"] .workspace-theme--pitlane .bg-sky-500,
+html[data-theme="light"] .workspace-theme--pitlane .bg-brand {
+  color: #fffaf2 !important;
+}
+
+html[data-theme="light"] .workspace-theme--pitlane .text-slate,
+html[data-theme="light"] .workspace-theme--pitlane .text-slate-300,
+html[data-theme="light"] .workspace-theme--pitlane .text-slate-500,
+html[data-theme="light"] .workspace-theme--pitlane .text-slate-600,
+html[data-theme="light"] .workspace-theme--pitlane .text-slate-700 {
+  color: #6d6258 !important;
+}
+
+html[data-theme="light"] .workspace-theme--pitlane .text-brand,
+html[data-theme="light"] .workspace-theme--pitlane .text-brand-dark,
+html[data-theme="light"] .workspace-theme--pitlane .text-brand-soft {
+  color: #a66a2f !important;
+}
+
+html[data-theme="light"] .workspace-theme--pitlane .bg-brand {
+  background: #be7b38 !important;
+  color: #fffaf2 !important;
+}
+
+html[data-theme="light"] .workspace-theme--pitlane .bg-brand.text-white,
+html[data-theme="light"] .workspace-theme--pitlane .bg-brand .text-white {
+  color: #fffaf2 !important;
+}
+
+html[data-theme="light"] .workspace-theme--pitlane input:not([type="checkbox"]):not([type="radio"]),
+html[data-theme="light"] .workspace-theme--pitlane select,
+html[data-theme="light"] .workspace-theme--pitlane textarea {
+  border-color: rgba(79, 57, 39, 0.2) !important;
+  background: #fffaf2 !important;
+  color: #29231e !important;
+}
+
+html[data-theme="light"] .workspace-theme--pitlane .workspace-dashboard-intro {
+  border-color: rgba(79, 57, 39, 0.16) !important;
+  background:
+    linear-gradient(rgba(166, 106, 47, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(166, 106, 47, 0.035) 1px, transparent 1px),
+    linear-gradient(135deg, #fffaf2, #f0dfcb) !important;
+  background-size: 32px 32px, 32px 32px, auto !important;
+}
+
+html[data-theme="light"] .workspace-theme--pitlane .workspace-side-menu {
+  border-color: rgba(79, 57, 39, 0.16) !important;
+  background: #fffaf2 !important;
+  color: #29231e !important;
+}
+
+html[data-theme="light"] .workspace-theme--pitlane .workspace-side-menu button {
+  color: #51463d !important;
+}
+
+html[data-theme="light"] .workspace-theme--pitlane .workspace-side-menu button:hover,
+html[data-theme="light"] .workspace-theme--pitlane .workspace-side-menu button.bg-white\/10 {
+  background: #f0dfcb !important;
+  color: #29231e !important;
+}
+
+/* BusinessSite is deliberately warm and light, independent of the device's
+   dark appearance. Keep the shared locale control inside that visual system. */
+.businesssite-locale > div > button {
+  border-color: rgba(37, 35, 31, 0.34) !important;
+  background: #f7f2e9 !important;
+  color: #25231f !important;
+  box-shadow: none !important;
+}
+
+.businesssite-locale > div > button:hover,
+.businesssite-locale > div > button:focus-visible {
+  border-color: #8a5c48 !important;
+  background: #fffaf1 !important;
+}
+
+.businesssite-locale [data-locale-menu] {
+  border-color: rgba(37, 35, 31, 0.2) !important;
+  background: #fffaf1 !important;
+  color: #25231f !important;
+  box-shadow: 0 22px 55px rgba(49, 41, 33, 0.2) !important;
+}
+
+.businesssite-locale [data-locale-menu] button {
+  background: transparent !important;
+  color: #4b453e !important;
+}
+
+.businesssite-locale [data-locale-menu] button:hover {
+  background: #eee3d7 !important;
+  color: #25231f !important;
+}
+
+.businesssite-locale [data-locale-menu] button[data-active="true"] {
+  background: #e3d1c2 !important;
+  color: #784934 !important;
+}
+
+/* BusinessSite onboarding deliberately keeps its warm product palette on
+   every device; it is an editor flow, not the dark PitlaneOne workspace. */
+.businesssite-onboarding { color: #25231f !important; }
+.businesssite-onboarding form { border-color: rgba(37, 35, 31, 0.15) !important; background: rgba(255, 250, 242, 0.9) !important; box-shadow: 0 24px 70px rgba(69, 53, 41, 0.1) !important; }
+.businesssite-onboarding .bg-white,
+.businesssite-onboarding .bg-slate-50,
+.businesssite-onboarding .bg-slate-100,
+.businesssite-onboarding .bg-slate-900,
+.businesssite-onboarding .bg-slate-950 {
+  /* `background`, rather than `background-color`, deliberately cancels the
+     dark-mode gradient declared for shared Tailwind utility classes. */
+  background: #fffaf2 !important;
+}
+.businesssite-onboarding .border-slate-100, .businesssite-onboarding .border-slate-200, .businesssite-onboarding .border-white\/10 { border-color: rgba(37, 35, 31, 0.13) !important; }
+.businesssite-onboarding .text-slate-950, .businesssite-onboarding .text-slate-900, .businesssite-onboarding .text-slate-800 { color: #25231f !important; }
+.businesssite-onboarding .text-slate-300, .businesssite-onboarding .text-slate-400, .businesssite-onboarding .text-slate-500, .businesssite-onboarding .text-slate-600, .businesssite-onboarding .text-slate-700 { color: #6b635b !important; }
+.businesssite-onboarding > header .text-white { color: #25231f !important; }
+.businesssite-onboarding .text-brand, .businesssite-onboarding .text-brand-soft { color: #8a5c48 !important; }
+.businesssite-onboarding .bg-brand,
+.businesssite-onboarding button.bg-slate-950 {
+  background: #805d4c !important;
+  color: #fffaf2 !important;
+  box-shadow: 0 8px 18px rgba(105, 76, 58, 0.14) !important;
+}
+.businesssite-onboarding input:not([type="checkbox"]):not([type="radio"]), .businesssite-onboarding select, .businesssite-onboarding textarea { border-color: rgba(52, 45, 39, 0.15) !important; background: #fffdf9 !important; color: #25231f !important; }
+
+body:has(.businesssite-onboarding) {
+  background: #f3efe6 !important;
+}
+
+/* The wizard owns its complete palette. It must not inherit generic dark-mode
+   utility remaps used by the operational dashboard. */
+.businesssite-onboarding form > :first-child {
+  border-color: rgba(52, 45, 39, 0.12) !important;
+  background: #f4eadf !important;
+}
+
+.businesssite-onboarding form > :first-child button {
+  color: #75695f !important;
+}
+
+.businesssite-onboarding form > :first-child button.bg-white {
+  background: #fbf5ec !important;
+  color: #8a5c48 !important;
+  box-shadow: inset 0 -2px 0 #bd8d73;
+}
+
+.businesssite-onboarding form > :first-child button.text-emerald-700 {
+  color: #568777 !important;
+}
+
+.businesssite-onboarding form > :last-child {
+  border-color: rgba(52, 45, 39, 0.12) !important;
+  background: #f7f1e8 !important;
+}
+
+.businesssite-onboarding form > :last-child .bg-slate-950 {
+  background: #805d4c !important;
+  color: #fffaf2 !important;
+}
+
+/* Summary cards on the final step are deliberately quieter than the main
+   surface: cream, warm ink and only a hairline border. */
+.businesssite-onboarding [class*="rounded-xl"].bg-slate-50 {
+  background: #f8f2e9 !important;
+  border-color: rgba(112, 86, 67, 0.16) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.68) !important;
+}
+
+/* BusinessSite keeps its own warm product surface inside the shared app shell.
+   PitlaneOne is intentionally dark; never let its dashboard tokens leak here. */
+html[data-theme] .workspace-theme--businesssite,
+.workspace-theme--businesssite {
+  color: #25231f !important;
+  background:
+    radial-gradient(circle at 94% 4%, rgba(182, 218, 232, 0.42), transparent 25rem),
+    radial-gradient(circle at 3% 82%, rgba(244, 210, 181, 0.34), transparent 28rem),
+    #f3efe6 !important;
+}
+
+html[data-theme] .workspace-theme--businesssite .workspace-header,
+.workspace-theme--businesssite .workspace-header {
+  border-color: rgba(82, 65, 49, 0.14) !important;
+  background: rgba(255, 250, 242, 0.94) !important;
+  color: #25231f !important;
+  box-shadow: 0 8px 30px rgba(74, 57, 42, 0.08) !important;
+}
+
+.workspace-theme--businesssite .bg-white,
+.workspace-theme--businesssite .bg-slate-50,
+.workspace-theme--businesssite .bg-slate-100,
+.workspace-theme--businesssite .bg-slate-100\/70,
+.workspace-theme--businesssite .bg-slate-900,
+.workspace-theme--businesssite .bg-slate-950 {
+  background-color: #fffaf2 !important;
+}
+
+.workspace-theme--businesssite .border-slate-100,
+.workspace-theme--businesssite .border-slate-200,
+.workspace-theme--businesssite .border-slate-300,
+.workspace-theme--businesssite .border-slate-700,
+.workspace-theme--businesssite .border-slate-800,
+.workspace-theme--businesssite .border-white\/10 {
+  border-color: rgba(82, 65, 49, 0.14) !important;
+}
+
+.workspace-theme--businesssite .text-white,
+.workspace-theme--businesssite .text-slate-950,
+.workspace-theme--businesssite .text-slate-900,
+.workspace-theme--businesssite .text-slate-800,
+.workspace-theme--businesssite .text-slate-700 {
+  color: #25231f !important;
+}
+
+.workspace-theme--businesssite .text-slate-600,
+.workspace-theme--businesssite .text-slate-500,
+.workspace-theme--businesssite .text-slate-400,
+.workspace-theme--businesssite .text-slate-300,
+.workspace-theme--businesssite .text-slate-200 {
+  color: #6b635b !important;
+}
+
+.workspace-theme--businesssite .text-brand,
+.workspace-theme--businesssite .text-brand-soft {
+  color: #9a6041 !important;
+}
+
+.workspace-theme--businesssite .bg-brand,
+.workspace-theme--businesssite button.bg-slate-950 {
+  background-color: #9a6041 !important;
+  color: #fffaf2 !important;
+}
+
+.workspace-theme--businesssite input,
+.workspace-theme--businesssite select,
+.workspace-theme--businesssite textarea {
+  border-color: rgba(82, 65, 49, 0.2) !important;
+  background-color: #fffdf9 !important;
+  color: #25231f !important;
+}
+
+.workspace-theme--businesssite input::placeholder,
+.workspace-theme--businesssite textarea::placeholder {
+  color: #8c8177 !important;
+}

@@ -1,0 +1,11 @@
+# Known limitations — 28 October 2026
+
+These findings are from the inspected source. They were not silently fixed in the working/private product while preparing the showcase.
+
+1. **Checkout return routes are absent.** `frontend/app/api/billing/checkout/route.ts` returns success/cancel URLs under `/billing/success` and `/billing/cancel`, but those App Router pages are absent in this snapshot. An actual completed/cancelled checkout needs those paths before a paid pilot is presented as complete.
+2. **Camera policy conflicts with scanning.** `frontend/next.config.mjs` sends `Permissions-Policy: camera=()` globally, while `components/camera-code-scanner.tsx` calls `getUserMedia`. That policy prevents the camera permission from being granted. Manual SKU/barcode entry remains the fallback; camera scanning is not claimed as verified here.
+3. **Billing migration 18 is not fully idempotent.** `20261018_finalize_product_pricing_demo_and_trials.sql` contains plain `create function` and an unconditional function rename. The repair to existing catalogue rows does not make the whole migration safe to rerun after partial execution. Inspect schema and design a versioned recovery before any hosted retry.
+4. **Live schema parity and billing are unverified.** The current local snapshot includes billing changes newer than the inspected hosted frontend. Its database project is INACTIVE; no reactivation, SQL repair, Stripe transaction, secret configuration or hosted rollout was performed. Source-contract tests inspect strings/fixtures, not actual database execution. The webhook function deduplicates event IDs; stale/out-of-order event behavior still requires a dedicated lifecycle test.
+5. **Pilot and launch are different gates.** Historical controlled pilot checks exist, but backup/restore rehearsal, remaining observability/alert checks, legal/accounting review, customer onboarding, live billing and fresh authenticated isolation evidence are not all closed. No GoBD, fiscal, legal, accounting or security certification is asserted. A current number of active workshops was not independently verified.
+
+Publishing this source does not deploy the product or change its existing customers, backend or billing. Future fixes should be implemented and verified in an explicit product workstream.

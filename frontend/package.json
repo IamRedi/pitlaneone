@@ -1,0 +1,53 @@
+{
+  "name": "pitlaneone-showcase-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build --webpack",
+    "start": "next start",
+    "lint": "eslint . --max-warnings=0",
+    "typecheck": "tsc --noEmit",
+    "test:company-rls": "node scripts/test-company-operational-rls.mjs",
+    "test:i18n": "node scripts/check-i18n.mjs",
+    "test:business-site-engine": "tsx scripts/test-business-site-engine.ts",
+    "test:billing-grants": "tsx scripts/test-billing-grant-contract.ts",
+    "seed:business-site-local": "tsx scripts/seed-local-businesssite-demos.ts",
+    "test:xrechnung": "tsx scripts/test-xrechnung.ts",
+    "test:auth-redirect": "tsx scripts/test-auth-redirect.ts",
+    "test:invitation-error": "tsx scripts/test-invitation-error.ts",
+    "test:e2e:install": "playwright install chromium",
+    "test:e2e:local-auth": "node scripts/run-local-auth-e2e.mjs",
+    "test:validation": "node --conditions=react-server --import tsx scripts/test-validation.ts"
+  },
+  "dependencies": {
+    "@sentry/nextjs": "10.78.0",
+    "@supabase/ssr": "^0.5.2",
+    "@supabase/supabase-js": "^2.49.8",
+    "clsx": "^2.1.1",
+    "jszip": "^3.10.1",
+    "lucide-react": "^0.511.0",
+    "next": "16.4.3",
+    "next-intl": "^4.13.4",
+    "pdf-lib": "^1.17.1",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "server-only": "0.0.1",
+    "stripe": "^22.5.0",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "@types/node": "^22.15.3",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "autoprefixer": "^10.4.21",
+    "dotenv": "^17.2.3",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "16.4.3",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^3.4.17",
+    "tsx": "^4.20.5",
+    "typescript": "^5.8.3"
+  }
+}

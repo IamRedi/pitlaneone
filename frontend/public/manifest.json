@@ -1,0 +1,18 @@
+{
+  "name": "PitlaneOne",
+  "short_name": "PitlaneOne",
+  "description": "Multilingual workshop management for customers, vehicles, services, invoices and stock.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#171b1f",
+  "theme_color": "#bd6d40",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
